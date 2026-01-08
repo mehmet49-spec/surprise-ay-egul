@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Ayşegül'e Özel Sürpriz 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffecd2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .gift-box {
+            font-size: 10em;
+            animation: shake 0.6s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(-8deg) scale(1); }
+            50% { transform: rotate(8deg) scale(1.1); }
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 2.5em;
+            margin-top: 40px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+
+        .explosion {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15em;
+            opacity: 0;
+            z-index: 10000;
+            pointer-events: none;
+        }
+
+        .explosion.show {
+            animation: explode 1.2s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.5) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(3) rotate(360deg);
+            }
+        }
+
+        .main-content {
+            opacity: 0;
+            transform: scale(0);
+            transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            width: 100%;
+            padding: 20px;
+        }
+
+        .main-content.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .surprise-box {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 50px 40px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.25);
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            border: 5px solid rgba(255,255,255,0.8);
+        }
+
+        .title-main {
+            font-size: 3.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            animation: titleBounce 2s ease-in-out infinite;
+            text-shadow: 2px 2px 20px rgba(102, 126, 234, 0.3);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.05); }
+        }
+
+        .age-celebration {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 60px;
+            font-size: 2.8em;
+            font-weight: bold;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+            animation: agePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes agePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .subtitle {
+            font-size: 2.2em;
+            color: #764ba2;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+
+        .heart-divider {
+            font-size: 2.5em;
+            margin: 30px 0;
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+        }
+
+        .message-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 30px;
+            border-radius: 25px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(252, 182, 159, 0.3);
+        }
+
+        .message-text {
+            font-size: 1.4em;
+            color: #5a2d0c;
+            line-height: 2;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .wishes-container {
+            margin: 35px 0;
+        }
+
+        .wish-item {
+            font-size: 1.5em;
+            color: #764ba2;
+            margin: 20px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 100%);
+            border-radius: 20px;
+            animation: wishFloat 3s ease-in-out infinite;
+            font-weight: bold;
+        }
+
+        .wish-item:nth-child(1) { animation-delay: 0s; }
+        .wish-item:nth-child(2) { animation-delay: 0.5s; }
+        .wish-item:nth-child(3) { animation-delay: 1s; }
+        .wish-item:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes wishFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .emoji-rain {
+            font-size: 2.8em;
+            margin: 25px 0;
+        }
+
+        .emoji-rain span {
+            display: inline-block;
+            margin: 0 8px;
+            animation: emojiDance 2s ease-in-out infinite;
+        }
+
+        .emoji-rain span:nth-child(odd) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes emojiDance {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(-10deg); }
+            75% { transform: translateY(-15px) rotate(10deg); }
+        }
+
+        .balloons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 4em;
+            animation: float 8s ease-in-out infinite;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); }
+            50% { transform: translateY(-30vh) rotate(180deg); }
+        }
+
+        .confetti {
+            position: fixed;
+            animation: fall 5s linear infinite;
+            font-size: 2em;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .star {
+            position: absolute;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .final-message {
+            font-size: 2em;
+            color: #f5576c;
+            margin-top: 30px;
+            font-weight: bold;
+            animation: glow 2s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(245, 87, 108, 0.5);
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(245, 87, 108, 0.5); }
+            50% { text-shadow: 0 0 25px rgba(245, 87, 108, 0.8); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="gift-box">🎁</div>
+        <div class="loading-text">Ayşegül için sürpriz hazırlanıyor...</div>
+    </div>
+
+    <div class="explosion" id="explosion">🎊</div>
+    <div class="balloons" id="balloons"></div>
+    <div class="stars-container" id="stars"></div>
+    
+    <div class="main-content" id="mainContent">
+        <div class="surprise-box">
+            <div class="title-main">AYŞEGÜL</div>
+            
+            <div class="age-celebration">
+                🎈 12 YAŞINDASIN! 🎈
+            </div>
+
+            <div class="subtitle">
+                DOĞUM GÜNÜN KUTLU OLSUN!
+            </div>
+
+            <div class="heart-divider">💕 💝 💕</div>
+
+            <div class="message-box">
+                <div class="message-text">
+                    Canım Ayşegül'üm,<br>
+                    12 yaşına girdiğin bu özel günde,<br>
+                    hayatına renk katan her anın<br>
+                    daha da güzelleşmesini diliyoruz! ✨<br>
+                    <br>
+                    Sen bizim için çok özelsin! 💖
+                </div>
+            </div>
+
+            <div class="wishes-container">
+                <div class="wish-item">
+                    🌟 Hayallerin gerçek olsun
+                </div>
+                <div class="wish-item">
+                    🌈 Her gün yeni bir macera dolu olsun
+                </div>
+                <div class="wish-item">
+                    🦋 Hep gülen yüzünü görelim
+                </div>
+                <div class="wish-item">
+                    💫 Mutluluğun hiç eksilmesin
+                </div>
+            </div>
+
+            <div class="emoji-rain">
+                <span>🎂</span>
+                <span>🎁</span>
+                <span>🎉</span>
+                <span>🎊</span>
+                <span>🎀</span>
+                <span>🌸</span>
+                <span>🦄</span>
+                <span>✨</span>
+            </div>
+
+            <div class="final-message">
+                SENİ ÇOK SEVİYORUZ! ❤️
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+                
+                const explosion = document.getElementById('explosion');
+                explosion.classList.add('show');
+                
+                setTimeout(() => {
+                    document.getElementById('mainContent').classList.add('show');
+                }, 600);
+                
+                setTimeout(() => {
+                    explosion.classList.remove('show');
+                }, 1200);
+            }, 2500);
+        });
+
+        // Balonlar
+        const balloonEmojis = ['🎈', '🎈', '🎈', '🎈'];
+        const balloonColors = ['#ff6b9d', '#ffd700', '#00d4ff', '#ff6b6b', '#51cf66', '#a18cd1'];
+        const balloonsContainer = document.getElementById('balloons');
+        
+        for (let i = 0; i < 20; i++) {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.textContent = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
+            balloon.style.left = Math.random() * 100 + '%';
+            balloon.style.animationDelay = Math.random() * 4 + 's';
+            balloon.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            balloonsContainer.appendChild(balloon);
+        }
+
+        // Konfeti
+        const confettiEmojis = ['🎊', '✨', '⭐', '💫', '🌟', '💝', '💖', '🎀', '🌸'];
+        for (let i = 0; i < 40; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.textContent = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = Math.random() * -20 + '%';
+            confetti.style.animationDelay = Math.random() * 5 + 's';
+            confetti.style.fontSize = (Math.random() * 25 + 20) + 'px';
+            document.body.appendChild(confetti);
+        }
+
+        // Yıldızlar
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 25; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.textContent = '⭐';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
